@@ -6,8 +6,13 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define([],
- function() {
+define(['knockout', 'ojs/ojinputtext'],
+ function(ko) {
+    this.texto = ko.observable();
+
+    this.texto.subscribe(function(value){
+      console.log(value);
+    });
 
     function DashboardViewModel() {
       var self = this;

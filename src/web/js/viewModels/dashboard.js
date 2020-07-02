@@ -6,7 +6,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['knockout', 'ojs/ojinputtext'],
+define(['knockout', 'ojs/ojinputtext', 'ojs/ojformlayout'],
  function(ko) {
     this.texto = ko.observable();
 

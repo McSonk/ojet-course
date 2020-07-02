@@ -12,6 +12,19 @@
 
 <h2>Hola mundo</h2>
 
-<oj-input-text value="{{texto}}" label-edge="inside" label-hint="Inserta algo" ></oj-input-text>
-Texto encontrado:
-<oj-bind-text value="{{texto}}"></oj-bind-text>
+  <div class="oj-item oj-sm-12">
+    <oj-form-layout max-columns="4" class="oj-sm-12 oj-lg-8">
+      <oj-input-text value="{{texto}}" label-edge="inside" label-hint="Inserta algo" ></oj-input-text>
+      <oj-input-text value="{{texto}}" label-edge="inside" label-hint="Inserta algo 2" ></oj-input-text>
+      <oj-input-text value="{{texto}}" label-edge="inside" label-hint="Inserta algo 3" ></oj-input-text>
+      <oj-input-text value="{{texto}}" label-edge="inside" label-hint="Inserta algo 4" ></oj-input-text>
+    </oj-form-layout>
+    <div class="oj-sm-12 oj-lg-4">
+      Texto encontrado: <oj-bind-text value="{{texto}}"></oj-bind-text>
+    </div>
+
+    <div class="oj-sm-only-hide">
+      Hola mundo para pantallas grandes
+    </div>
+
+</div>  

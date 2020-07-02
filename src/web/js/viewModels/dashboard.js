@@ -8,13 +8,14 @@
  */
 define(['knockout', 'ojs/ojinputtext', 'ojs/ojformlayout'],
  function(ko) {
-    this.texto = ko.observable();
-
-    this.texto.subscribe(function(value){
-      console.log(value);
-    });
-
-    function DashboardViewModel() {
+   
+   function DashboardViewModel() {
+      this.texto = ko.observable();
+  
+      this.texto.subscribe(function(value){
+        console.log(value);
+      });
+      
       var self = this;
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.

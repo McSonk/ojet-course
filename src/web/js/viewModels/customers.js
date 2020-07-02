@@ -8,6 +8,14 @@
  */
 define([],
  function() {
+  define(['knockout', 'ojs/ojinputtext']),
+  function(ko) {
+    this.texto = ko.observable();
+    this.texto.subscribe(function(value){
+       console.log(value);
+    });
+  }
+  
 
     function CustomerViewModel() {
       var self = this;

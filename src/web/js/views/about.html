@@ -2,9 +2,21 @@
  Copyright (c) 2014, 2019, Oracle and/or its affiliates.
  The Universal Permissive License (UPL), Version 1.0
  -->
-<div class="oj-hybrid-padding">
-  <h1>About Content Area</h1>
-  <div>
-      To change the content of this section, you will make edits to the about.html file located in the /js/views folder.
-  </div>
-</div>
+
+ <oj-form-layout max-columns="2">
+
+   <oj-input-text label-edge="inside" label-hint="Inserta tu nombre" value="{{nombre}}"></oj-input-text>
+   <oj-input-text label-edge="inside" label-hint="Inserta tu apellido" value="{{apellido}}"></oj-input-text>
+ </oj-form-layout>
+
+<br/>
+<oj-bind-text value="{{nombre}}"></oj-bind-text>
+<oj-bind-text value="{{apellido}}"></oj-bind-text>
+<br/>
+<oj-button on-oj-action="[[onAccept]]" >Aceptar</oj-button>
+
+<oj-button on-oj-action="[[onModify]]" >Modifica valor</oj-button>
+
+
+<oj-table data="[[dataProvider]]" columns="[[columns]]" ></oj-table>
+

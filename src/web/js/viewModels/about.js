@@ -51,7 +51,8 @@ function(ko, ArrayDataProvider, $){
                 }
             };
             $.ajax({
-                'url': 'agregarDato',
+                'url': 'persona/',
+                'method': 'post',
                 'data': datos,
                 'success': function(data){
                     this.valores.push(datos);
@@ -70,11 +71,23 @@ function(ko, ArrayDataProvider, $){
         };
 
         this.connected = function(){
-            console.log('Connected');
+            $.ajax({
+                url: 'persona/',
+                method: 'get',
+                success: function(data){
+                    self.valores(data);
+                    $.ajax({
+                        url: 'persona/1/',
+                        success: function(data){
+                            console.log(data);
+                        }
+                    });
+                }
+            });
         };
 
         this.disconnected = function(){
-            console.log('disconnected');
+            self.valores.removeAll();
         }
 
         this.init = function(){

@@ -44,7 +44,7 @@ define(['knockout', 'ojs/ojarraydataprovider', 'jquery',
             console.log("El nuevo valor es: " + newValue);
         };
 
-        this.nombre.subscribe(_onNombreUpdated);
+        this.name.subscribe(_onNombreUpdated);
 
         this.onAccept = function(){
             var datos = {
@@ -60,6 +60,7 @@ define(['knockout', 'ojs/ojarraydataprovider', 'jquery',
             };
             $.ajax({
                 'url': 'agregarDato',
+                'method': 'POST',
                 'data': datos,
                 'success': function(data){
                     this.valores.push(datos);

@@ -9,9 +9,26 @@
   </div>
 </div>
 
-<h2>This is Avrils changes</h2>
+<oj-form-layout max-columns="5">
 
-<oj-input-text value="{{texto}}" label-edge="inside" label-hint="Write something here" ></oj-input-text>
-Text found:
-<oj-bind-text value="{{texto}}"></oj-bind-text>
+  <oj-input-text label-edge="inside" label-hint="Inserta tu Nombre" value="{{name}}"></oj-input-text>
+  <oj-input-text label-edge="inside" label-hint="Inserta tu Apellido" value="{{lastname}}"></oj-input-text>
+  <oj-input-text label-edge="inside" label-hint="Ingresa un nombre de usuario" value="{{user}}"></oj-input-text>
+  <oj-input-text label-edge="inside" label-hint="Ingresa una contraseña" value="{{pwd}}"></oj-input-text>
+  <oj-input-text label-edge="inside" label-hint="Repite tu contraseña" value="{{repwd}}"></oj-input-text>
+</oj-form-layout>
+
+<br/>
+<oj-bind-text value="{{name}}"></oj-bind-text>
+<oj-bind-text value="{{lastname}}"></oj-bind-text>
+<oj-bind-text value="{{user}}"></oj-bind-text>
+<oj-bind-text value="{{pwd}}"></oj-bind-text>
+<oj-bind-text value="{{repwd}}"></oj-bind-text>
+<br/>
+<oj-button on-oj-action="[[onAccept]]" >Aceptar</oj-button>
+
+<oj-button on-oj-action="[[onModify]]" >Modifica valor</oj-button>
+
+
+<oj-table data="[[dataProvider]]" columns="[[columns]]" ></oj-table>
 

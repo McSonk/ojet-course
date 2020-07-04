@@ -1,60 +1,97 @@
-/**
- * @license
- * Copyright (c) 2014, 2019, Oracle and/or its affiliates.
- * The Universal Permissive License (UPL), Version 1.0
- */
-/*
- * Your customer ViewModel code goes here
- */
-define([],
- function() {
-  define(['knockout', 'ojs/ojinputtext']),
-  function(ko) {
-    this.texto = ko.observable();
-    this.texto.subscribe(function(value){
-       console.log(value);
-    });
-  }
-  
+define(['knockout', 'ojs/ojarraydataprovider', 'jquery',
+        'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojformlayout', 'ojs/ojtable'], 
+        function(ko, ArrayDataProvider, $) { function CustomerViewModel(){
+        var self = this;
+        this.name = ko.observable();
+        this.lastname = ko.observable();
+        this.user = ko.observable();
+        this.pwd = ko.observable();
+        this.repwd = ko.observable();
+        this.valores = ko.observableArray();
 
-    function CustomerViewModel() {
-      var self = this;
-      // Below are a set of the ViewModel methods invoked by the oj-module component.
-      // Please reference the oj-module jsDoc for additional information.
+        this.columns = [ {
+              "headerText": 'Nombre',
+              "field": "name" }, 
+            {
+              "headerText": 'Apellido',
+              "field": "lastname" },
+            {
+              "headerText": 'Usuario',
+              "field": "user" },
+            {
+              "headerText": 'Contraseña',
+              "field": "pwd" },
+            {
+              "headerText": 'Confirmar Contraseña',
+              "field": "repwd" },    
+            {
+              "headerText": 'Estatus',
+              "field": 'estatus.activado' },
+            {
+              "headerText": 'Actualizado el',
+              "renderer": function(context){
+              console.log(context.row);
+              return {'insert': context.row.estatus.lastUpdated.toLocaleString()  }
+            }}];
 
-      /**
-       * Optional ViewModel method invoked after the View is inserted into the
-       * document DOM.  The application can put logic that requires the DOM being
-       * attached here.
-       * This method might be called multiple times - after the View is created
-       * and inserted into the DOM and after the View is reconnected
-       * after being disconnected.
-       */
-      self.connected = function() {
-        // Implement if needed
-      };
+        this.dataProvider = new ArrayDataProvider(this.valores, {keyAttributes: 'apellido'});
 
-      /**
-       * Optional ViewModel method invoked after the View is disconnected from the DOM.
-       */
-      self.disconnected = function() {
-        // Implement if needed
-      };
+        /**
+         * Disparada cuando el valor de la variable "nombre" cambia
+         * @param {string} newValue El valor actualizado de la variable
+         */
+        var _onNombreUpdated = function(newValue){
+            console.log("El nuevo valor es: " + newValue);
+        };
 
-      /**
-       * Optional ViewModel method invoked after transition to the new View is complete.
-       * That includes any possible animation between the old and the new View.
-       */
-      self.transitionCompleted = function() {
-        // Implement if needed
-      };
+        this.nombre.subscribe(_onNombreUpdated);
+
+        this.onAccept = function(){
+            var datos = {
+                name: this.name(),
+                lastname: this.lastname(),
+                user: this.user(),
+                pwd: this.pwd(),
+                repwd: this.repwd(),
+                estatus: {
+                    "activado": true,
+                    "lastUpdated": new Date()
+                }
+            };
+            $.ajax({
+                'url': 'agregarDato',
+                'data': datos,
+                'success': function(data){
+                    this.valores.push(datos);
+                    this.nombre(null);
+                    this.apellido(null);
+                },
+                'error': function(jqXhr, textStatus, errorThrown){
+                    console.error("Error\n" + textStatus + ": " + errorThrown);
+                }
+            });
+        }.bind(this);
+
+        this.onModify = function() {
+            self.name();
+            self.lastname();
+            self.user();
+            self.pwd();
+            self.repwd();
+        };
+
+        this.connected = function(){
+            console.log('Connected');
+        };
+
+        this.disconnected = function(){
+            console.log('Disconnected');
+        }
+
+        this.init = function(){
+            console.log('init');
+            return self;
+        };
     }
-
-    /*
-     * Returns a constructor for the ViewModel so that the ViewModel is constructed
-     * each time the view is displayed.  Return an instance of the ViewModel if
-     * only one instance of the ViewModel is needed.
-     */
-    return new CustomerViewModel();
-  }
-);
+    return new CustomerViewModel().init();
+});

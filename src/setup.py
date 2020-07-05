@@ -6,7 +6,7 @@ $VENV/pip install -e .
 """
 from setuptools import setup
 
-__version__ = "1.0"
+__version__ = "1.1"
 
 REQUIRED_PACKAGES = [
     #Pyramid framework
@@ -15,6 +15,11 @@ REQUIRED_PACKAGES = [
     'pyramid_debugtoolbar',
     #Pyramid Transaction Manager
    'pyramid_tm',
+   #Python ORM
+   'sqlalchemy',
+   'zope.sqlalchemy',
+    #ODBC for postgres
+    'psycopg2'
 ]
 
 setup(name='pam',
